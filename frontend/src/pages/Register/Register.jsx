@@ -1,9 +1,21 @@
+import Navbar from "../../components/Navbar/Navbar";
+
 function Register() {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    alert("Registeration successful");
+    
+  };
+
   return (
     <div>
+      <Navbar />
+
       <h1>Create Account</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
           <br />

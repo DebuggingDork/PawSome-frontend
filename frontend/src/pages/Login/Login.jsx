@@ -1,3 +1,4 @@
+import Navbar from "../../components/Navbar/Navbar";
 function Login() {
   return (
     <div>
