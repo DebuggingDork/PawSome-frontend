@@ -7,6 +7,10 @@ function Navbar() {
       {" | "}
       <Link to="/about">About</Link>
       {" | "}
+      <Link to="/how-it-works">How It Works</Link>
+      {" | "}
+      <Link to="/success-stories">Success Stories</Link>
+      {" | "}
       <Link to="/contact">Contact Us</Link>
     </nav>
   );

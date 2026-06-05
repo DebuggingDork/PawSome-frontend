@@ -6,7 +6,7 @@ function Register() {
   const handleRegister = () => {
     alert("Registration Successful");
 
-    navigate("/login");
+    navigate("/dashboard");
   };
 
   return (
