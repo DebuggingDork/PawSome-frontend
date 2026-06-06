@@ -1,46 +1,46 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home/Home";
-import About from "../pages/About/About";
-import Contact from "../pages/Contact/Contact";
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import HowItWorks from "../pages/HowItWorks/HowItWorks";
-import SuccessStories from "../pages/SuccessStories/SuccessStories";
-import FindMatch from "../pages/FindMatch/FindMatch";
-import MyPets from "../pages/MyPets/MyPets";
-import Messages from "../pages/Messages/Messages";
-import Profile from "../pages/Profile/Profile";
+// Layouts
+import MainLayout from "../layouts/MainLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
 
+// Public Pages — /about, /how-it-works, /success-stories, /contact all render Home
+// Home reads the current pathname and scrolls to the correct section automatically
+import Home from "../pages/public/Home/Home";
+import Login from "../pages/public/Login/Login";
+import Register from "../pages/public/Register/Register";
+
+// Dashboard Pages
+import Dashboard from "../pages/dashboard/Dashboard/Dashboard";
+import FindMatch from "../pages/dashboard/FindMatch/FindMatch";
+import MyPets from "../pages/dashboard/MyPets/MyPets";
+import Messages from "../pages/dashboard/Messages/Messages";
+import Profile from "../pages/dashboard/Profile/Profile";
+
+/**
+ * AppRoutes — all public section paths point to <Home />.
+ * Home.tsx uses useLocation to detect the path and scrolls to the right section.
+ */
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      {/* All public section routes render <Home /> — it handles internal scrolling */}
+      <Route path="/"                element={<MainLayout><Home /></MainLayout>} />
+      <Route path="/about"           element={<MainLayout><Home /></MainLayout>} />
+      <Route path="/how-it-works"    element={<MainLayout><Home /></MainLayout>} />
+      <Route path="/success-stories" element={<MainLayout><Home /></MainLayout>} />
+      <Route path="/contact"         element={<MainLayout><Home /></MainLayout>} />
 
-      <Route path="/about" element={<About />} />
-
-      <Route path="/contact" element={<Contact />} />
-
-      <Route path="/login" element={<Login />} />
-
+      {/* Auth pages (no layout wrapper) */}
+      <Route path="/login"    element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/dashboard" element={<Dashboard />} />
-
-      <Route path="/how-it-works" element={<HowItWorks />}/>
-
-      <Route path="/success-stories" element={<SuccessStories />}/>
-
-      <Route path="/find-match" element={<FindMatch />} />
-
-      <Route path="/my-pets" element={<MyPets />} />
-
-      <Route path="/messages" element={<Messages />} />
-      
-      <Route path="/profile" element={<Profile />} />
-
-      
+      {/* Dashboard pages */}
+      <Route path="/dashboard"   element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+      <Route path="/find-match"  element={<DashboardLayout><FindMatch /></DashboardLayout>} />
+      <Route path="/my-pets"     element={<DashboardLayout><MyPets /></DashboardLayout>} />
+      <Route path="/messages"    element={<DashboardLayout><Messages /></DashboardLayout>} />
+      <Route path="/profile"     element={<DashboardLayout><Profile /></DashboardLayout>} />
     </Routes>
   );
 }
