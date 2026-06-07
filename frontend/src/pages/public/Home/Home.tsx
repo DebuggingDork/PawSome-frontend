@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import ParticleBackground from "../../../components/ui/ParticleBackground";
 import "./Home.css";
 
-/**
- * Maps URL pathnames to section element IDs on this page.
- * e.g. /about → scrolls to <section id="about">
- */
 const PATH_TO_SECTION: Record<string, string> = {
   "/about":           "about",
   "/how-it-works":    "how-it-works",
@@ -13,9 +10,6 @@ const PATH_TO_SECTION: Record<string, string> = {
   "/contact":         "contact",
 };
 
-/**
- * Scrolls to a section element by id, accounting for the sticky navbar height.
- */
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
   if (el) {
@@ -24,11 +18,6 @@ function scrollToSection(id: string) {
   }
 }
 
-/**
- * Home — one page that contains ALL public sections.
- * Each section has a unique id. Navbar links navigate to /about, /how-it-works, etc.
- * useEffect maps the current pathname to the right section and scrolls to it.
- */
 function Home() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,77 +25,60 @@ function Home() {
   useEffect(() => {
     const sectionId = PATH_TO_SECTION[location.pathname];
     if (sectionId) {
-      // Small delay lets the page render before we try to scroll
       const timer = setTimeout(() => scrollToSection(sectionId), 80);
       return () => clearTimeout(timer);
     } else {
-      // Root "/" — scroll to top
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location.pathname]);
 
   return (
     <div className="home-page">
+      <ParticleBackground />
 
       {/* ─────────────────────── HERO ─────────────────────── */}
       <section id="home" className="home-hero">
+        <div className="hero-overlay" aria-hidden="true" />
+
         <div className="container hero-grid">
           <div className="hero-content">
-            <span className="hero-tagline">Playful matching, verified connections</span>
-            <h1 className="hero-title">Find the Perfect Match for Your Pet</h1>
+            <span className="hero-tagline">🐾 Pet Matching Platform</span>
+            <h1 className="hero-title">PAWSOME</h1>
             <p className="hero-description">
-              Connect responsible pet owners, discover compatible playdates, and
-              build trusted relationships through Pawsome.
+              Connect your pet with compatible companions through intelligent
+              matching, verified profiles, and a trusted community of pet owners.
             </p>
             <div className="hero-actions">
-              <button className="btn-primary" onClick={() => navigate("/login")}>
+              <button className="btn-primary hero-cta" onClick={() => navigate("/login")}>
                 Get Started
               </button>
-              <button className="btn-secondary" onClick={() => navigate("/how-it-works")}>
-                Learn More
-              </button>
             </div>
           </div>
 
+          {/* Glassmorphism match-preview card */}
           <div className="hero-visual">
-            <div className="hero-visual-card">
-              <div className="glass-badge-card badge-card-1">
-                <div className="badge-emoji">🐶</div>
-                <div className="badge-info">
-                  <h4>Rex (Golden Retriever)</h4>
-                  <p>Looking for active playdate</p>
-                </div>
+            <div className="hero-pet-card">
+              <div className="hero-pet-image-wrap">🐕</div>
+
+              <div className="hero-pet-status">
+                <span className="status-dot" aria-hidden="true" />
+                Looking for a Match
               </div>
-              <div className="glass-badge-card badge-card-2">
-                <div className="badge-emoji">🐱</div>
-                <div className="badge-info">
-                  <h4>Luna (Siamese Cat)</h4>
-                  <p>Highly compatible match found!</p>
-                </div>
+
+              <h3 className="hero-pet-name">Buddy</h3>
+
+              <div className="hero-pet-details">
+                <span>🐕 Golden Retriever</span>
+                <span>📅 2 yrs old</span>
+              </div>
+
+              <div className="hero-pet-divider" />
+
+              <div className="hero-card-footer">
+                <span className="hero-card-label">Compatibility Score</span>
+                <span className="hero-match-score">97% ✨</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────── STATS ─────────────────────── */}
-      <section className="home-stats">
-        <div className="container stats-grid">
-          <div className="stat-item">
-            <span className="stat-number">15,000+</span>
-            <span className="stat-label">Pets Matched</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">98%</span>
-            <span className="stat-label">Satisfaction Rate</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">50+</span>
-            <span className="stat-label">Cities Supported</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">5,000+</span>
-            <span className="stat-label">Active Owners</span>
           </div>
         </div>
       </section>
@@ -122,14 +94,14 @@ function Home() {
             <h2>Built by pet lovers, for pet lovers</h2>
             <p>
               Pawsome was born from a simple idea — every pet deserves a great
-              social life. Founded in 2024, our platform brings together
-              responsible owners who genuinely care about their pets' wellbeing,
-              social development, and happiness.
+              companion. Founded in 2024, our platform brings together responsible
+              owners who genuinely care about their pets' wellbeing, social
+              development, and happiness.
             </p>
             <p>
-              We believe pets thrive when they build meaningful connections.
-              Whether it's a playdate, a compatible companion, or a trusted
-              local community — Pawsome makes it safe, simple, and joyful.
+              We believe pets thrive when they find their perfect match. Whether
+              it's a compatible playmate, a lifelong companion, or a trusted local
+              community — Pawsome makes it safe, smart, and joyful.
             </p>
             <div className="about-badges">
               <span className="about-badge">🏅 Trusted Platform</span>
@@ -166,56 +138,14 @@ function Home() {
               <div className="step-number">03</div>
               <div className="step-icon">🔍</div>
               <h3>Discover Matches</h3>
-              <p>Browse nearby compatible pets filtered by size, energy, and traits.</p>
+              <p>Browse compatible pets filtered by size, energy, and traits.</p>
             </div>
             <div className="step-connector" aria-hidden="true">→</div>
             <div className="step-card">
               <div className="step-number">04</div>
               <div className="step-icon">💬</div>
               <h3>Connect &amp; Meet</h3>
-              <p>Message owners securely, arrange a playdate, and build friendships.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────────────────── FEATURES ─────────────────────── */}
-      <section className="home-features">
-        <div className="container">
-          <div className="section-header">
-            <h2>Why Owners Love Pawsome</h2>
-            <p>Modern matching technology meets a safe, trusted community.</p>
-          </div>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">🎯</div>
-              <h3>Compatibility Matching</h3>
-              <p>Filter by temperament, size, energy level, and location to find the ideal companion.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">🛡️</div>
-              <h3>Verified Profiles</h3>
-              <p>Owner profiles and vet records are reviewed so every connection is trustworthy.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">💬</div>
-              <h3>Secure In-App Chat</h3>
-              <p>Message owners, share photos, and arrange meetups privately within Pawsome.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">📍</div>
-              <h3>Location-Based Search</h3>
-              <p>Discover pets in your neighbourhood and connect with nearby owners.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">🔔</div>
-              <h3>Smart Notifications</h3>
-              <p>Real-time alerts when a compatible match or message arrives for your pet.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">📊</div>
-              <h3>Match Analytics</h3>
-              <p>Track profile views, match rate, and playdate history in one dashboard.</p>
+              <p>Message owners securely, arrange a meetup, and build friendships.</p>
             </div>
           </div>
         </div>
@@ -232,8 +162,8 @@ function Home() {
             <div className="story-card">
               <span className="quote-mark">"</span>
               <p className="testimonial-text">
-                Finding a social partner for my beagle was so difficult until we joined Pawsome.
-                In under a week we discovered two amazing local playmates. It's the Airbnb of pet matching!
+                Finding a companion for my beagle was so difficult until we joined Pawsome.
+                In under a week we discovered two amazing local matches. It's the smartest pet platform out there!
               </p>
               <div className="testimonial-user">
                 <div className="testimonial-avatar">S</div>
@@ -263,7 +193,7 @@ function Home() {
               <span className="quote-mark">"</span>
               <p className="testimonial-text">
                 The compatibility matching is incredibly smart. Pawsome paired my high-energy
-                Labrador with the perfect partner — another Lab who loves morning runs!
+                Labrador with the perfect companion — another Lab who loves morning runs!
               </p>
               <div className="testimonial-user">
                 <div className="testimonial-avatar">A</div>
@@ -340,17 +270,6 @@ function Home() {
               Send Message ✉️
             </button>
           </form>
-        </div>
-      </section>
-
-      {/* ─────────────────────── CTA BANNER ─────────────────────── */}
-      <section className="home-cta">
-        <div className="container cta-card">
-          <h2>Ready to discover your pet's pack?</h2>
-          <p>Register in seconds, set up your pet profile, and browse compatible owners near you.</p>
-          <button className="btn-primary" onClick={() => navigate("/login")}>
-            Create Free Account
-          </button>
         </div>
       </section>
 
