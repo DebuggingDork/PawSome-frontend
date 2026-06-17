@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 // Layouts
 import MainLayout from "../layouts/MainLayout";
@@ -17,10 +18,6 @@ import MyPets from "../pages/dashboard/MyPets/MyPets";
 import Messages from "../pages/dashboard/Messages/Messages";
 import Profile from "../pages/dashboard/Profile/Profile";
 
-/**
- * AppRoutes — all public section paths point to <Home />.
- * Home.tsx uses useLocation to detect the path and scrolls to the right section.
- */
 function AppRoutes() {
   return (
     <Routes>
@@ -35,12 +32,12 @@ function AppRoutes() {
       <Route path="/login"    element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      {/* Dashboard pages */}
-      <Route path="/dashboard"   element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-      <Route path="/find-match"  element={<DashboardLayout><FindMatch /></DashboardLayout>} />
-      <Route path="/my-pets"     element={<DashboardLayout><MyPets /></DashboardLayout>} />
-      <Route path="/messages"    element={<DashboardLayout><Messages /></DashboardLayout>} />
-      <Route path="/profile"     element={<DashboardLayout><Profile /></DashboardLayout>} />
+      {/* Protected dashboard pages — redirect to /login when unauthenticated */}
+      <Route path="/dashboard"  element={<ProtectedRoute><DashboardLayout><Dashboard /></DashboardLayout></ProtectedRoute>} />
+      <Route path="/find-match" element={<ProtectedRoute><DashboardLayout><FindMatch /></DashboardLayout></ProtectedRoute>} />
+      <Route path="/my-pets"    element={<ProtectedRoute><DashboardLayout><MyPets /></DashboardLayout></ProtectedRoute>} />
+      <Route path="/messages"   element={<ProtectedRoute><DashboardLayout><Messages /></DashboardLayout></ProtectedRoute>} />
+      <Route path="/profile"    element={<ProtectedRoute><DashboardLayout><Profile /></DashboardLayout></ProtectedRoute>} />
     </Routes>
   );
 }
