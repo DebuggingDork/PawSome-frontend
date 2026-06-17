@@ -1,18 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 import "./Dashboard.css";
 
-/**
- * Redesigned primary Dashboard page providing a clean, data-driven overview
- * of the user's pet matching statistics, recommendations, and action paths.
- */
 function Dashboard() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const displayName = user?.email.split('@')[0] ?? 'there';
 
   return (
     <div className="dashboard-view">
       {/* Welcome Title Area */}
       <section className="dashboard-welcome">
-        <h1>Welcome back, Paul!</h1>
+        <h1>Welcome back, {displayName}!</h1>
         <p>Here's what is happening with your pet profiles today.</p>
       </section>
 
