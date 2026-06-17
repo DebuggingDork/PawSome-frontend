@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "./tokens.css";
+
+/* Reset & Box Model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #0f172a;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  color: hsl(var(--neutral-800));
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Custom paw cursor (site-wide) ─── */
+* {
+  cursor: url('/cursor-paw.svg') 9 9, auto;
+}
+
+a, button, [role="button"],
+input[type="submit"], input[type="button"],
+input[type="checkbox"], input[type="radio"],
+select {
+  cursor: url('/cursor-paw.svg') 9 9, pointer;
+}
+
+input[type="text"], input[type="email"],
+input[type="password"], input[type="search"],
+textarea {
+  cursor: url('/cursor-paw.svg') 9 9, text;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  color: hsl(var(--neutral-900));
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+}
+
+/* Links */
+a {
+  color: hsl(var(--brand-secondary));
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: hsl(var(--brand-secondary) / 0.85);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--neutral-100));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--neutral-300));
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--neutral-400));
+}
+
+/* Accessibility Focus Ring */
+*:focus-visible {
+  outline: 2px solid hsl(var(--brand-secondary));
+  outline-offset: 2px;
+}
+
+/* Layout helpers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}

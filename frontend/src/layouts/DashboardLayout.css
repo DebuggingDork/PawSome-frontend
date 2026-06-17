@@ -1,0 +1,29 @@
+.dashboard-layout-container {
+  min-height: 100vh;
+  display: flex;
+  background-color: hsl(var(--neutral-50));
+}
+
+.dashboard-main-content {
+  flex-grow: 1;
+  margin-left: 260px; /* Sidebar width */
+  padding-top: 72px;  /* Header height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--transition-normal);
+}
+
+.dashboard-page-body {
+  flex-grow: 1;
+  padding: var(--spacing-xl);
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .dashboard-main-content {
+    margin-left: 0;
+  }
+}

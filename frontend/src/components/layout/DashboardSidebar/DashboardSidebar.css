@@ -1,0 +1,102 @@
+.dashboard-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid hsl(var(--neutral-200));
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg) 0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0 var(--spacing-lg) var(--spacing-xl) var(--spacing-lg);
+  font-family: var(--font-family-display);
+  font-weight: 800;
+  font-size: var(--font-size-2xl);
+  color: hsl(var(--neutral-900));
+  border-bottom: 1px solid hsl(var(--neutral-100));
+  margin-bottom: var(--spacing-lg);
+}
+
+.sidebar-logo-icon {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, hsl(var(--brand-primary)) 0%, hsl(var(--brand-secondary)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-logo-text {
+  background: linear-gradient(135deg, hsl(var(--neutral-900)) 50%, hsl(var(--brand-primary)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+  flex-grow: 1;
+  padding: 0 var(--spacing-md);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: hsl(var(--neutral-600));
+  font-weight: 550;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-link:hover {
+  background-color: hsl(var(--neutral-100));
+  color: hsl(var(--brand-secondary));
+  transform: translateX(2px);
+}
+
+.sidebar-link.active {
+  background-color: hsl(var(--brand-secondary) / 0.08);
+  color: hsl(var(--brand-secondary));
+}
+
+.sidebar-link-icon {
+  font-size: 1.2rem;
+}
+
+.sidebar-footer {
+  padding: var(--spacing-md) var(--spacing-lg) 0 var(--spacing-lg);
+  border-top: 1px solid hsl(var(--neutral-100));
+}
+
+.sidebar-logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: transparent;
+  border: none;
+  color: hsl(var(--status-danger));
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.sidebar-logout-btn:hover {
+  background-color: hsl(var(--status-danger-bg));
+  transform: translateX(2px);
+}
