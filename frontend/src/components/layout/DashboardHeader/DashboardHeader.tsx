@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 import "./DashboardHeader.css";
 
-/**
- * Top header bar for the dashboard containing a search bar,
- * notifications toggle, and the profile dropdown menu.
- */
 function DashboardHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  // Derive a display name from the email (e.g. "jane@example.com" → "jane")
+  const displayName = user?.email.split('@')[0] ?? '';
+  const avatarLetter = displayName.charAt(0).toUpperCase();
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -27,7 +28,8 @@ function DashboardHeader() {
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
       setIsDropdownOpen(false);
-      navigate("/login");
+      logout();
+      // ProtectedRoute redirects to /login automatically when user becomes null
     }
   };
 
@@ -58,8 +60,8 @@ function DashboardHeader() {
             aria-expanded={isDropdownOpen}
             aria-label="User profile menu"
           >
-            <div className="avatar-circle">P</div>
-            <span className="user-meta-name">Paul</span>
+            <div className="avatar-circle">{avatarLetter}</div>
+            <span className="user-meta-name">{displayName}</span>
             <span className="dropdown-arrow">▼</span>
           </button>
 

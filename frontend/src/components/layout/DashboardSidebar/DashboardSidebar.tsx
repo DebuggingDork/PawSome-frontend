@@ -1,15 +1,14 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 import "./DashboardSidebar.css";
 
-/**
- * Vertical Sidebar navigation component for the authenticated dashboard area.
- */
 function DashboardSidebar() {
-  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
-      navigate("/login");
+      logout();
+      // ProtectedRoute redirects to /login automatically when user becomes null
     }
   };
 
